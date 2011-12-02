@@ -1,3 +1,3 @@
-module Sapling
+class Sapling
   VERSION = "0.0.1"
 end
