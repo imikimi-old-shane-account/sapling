@@ -1,5 +1,6 @@
 require "sapling/version"
-require "sapling/db"
+require "sapling/base"
+require "sapling/memory"
 
 module Sapling
   # Your code goes here...
