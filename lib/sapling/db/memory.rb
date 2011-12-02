@@ -1,4 +1,4 @@
-module Sapling::DB
+module Sapling
   class Memory < Base
 
     class Feature < Base::Feature

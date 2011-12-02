@@ -1,4 +1,4 @@
-module Sapling::DB
+module Sapling
   class Base
     class Feature
       def initialize(users=[],percentage=0)

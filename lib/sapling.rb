@@ -1,6 +1,6 @@
 require "sapling/version"
 require "sapling/db"
 
-class Sapling
+module Sapling
   # Your code goes here...
 end
