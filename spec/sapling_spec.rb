@@ -2,18 +2,41 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Sapling" do
   before do
-    
+    @db = Sapling::DB::Memory.new
+    @sapling = Sapling.new(@db)
   end
   
-  describe "features default to being disabled"
+  describe "features default to being disabled" do
+    it "is not active for a specific user by default" do 
+      @sapling.should_not be_active(:chat, stub(:id => 5))
+    end
+  end
   
-  describe "activating a percentage"
+  describe "activating a percentage" do
+    before do
+      @sapling.activate_percentage(:chat, 20)
+    end
+    
+    it "activates the fature for that percentage of users" do
+      (1..120).select { |id| @sapling.active?(:chat, stub(:id => id)) }.length.should == 39
+    end    
+  end
   
-  describe "deactivating a percentage"
+  describe "deactivating a percentage" do
+    before do
+      @sapling.activate_percentage(:chat, 100)
+      @sapling.deactivate_percentage(:chat)
+    end
+    
+    it "becomes inactive for all users" do
+      @sapling.should_not be_active(:chat, :stub(:id => 24))
+    end
+  end
   
-  describe "activating an individual user"
-  
-  describe "deactivating an individual user"
+  describe "activating a specific user" 
+    
+      
+  describe "deactivating a specific user"
     
   
 end
