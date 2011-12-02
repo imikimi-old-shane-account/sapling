@@ -3,7 +3,7 @@ module DB
 
   class DBBase
     class Feature
-      def initialize(users,percentage)
+      def initialize(users=[],percentage=0)
         self.percentage = percentage
         self.users = users
       end
