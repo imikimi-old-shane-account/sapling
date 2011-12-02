@@ -4,7 +4,7 @@ require 'sapling'
 require 'rspec'
 require 'rspec/autorun'
 
-RSpec.configuration do |config|
+RSpec.configure do |config|
   config.mock_with :mocha
   config.before { }
 end
