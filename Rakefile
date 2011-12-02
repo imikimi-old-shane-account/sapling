@@ -1,5 +1,6 @@
 require "bundler/gem_tasks"
 
+require 'rake'
 require 'spec/rake/spectask'
 Spec::Rake::SpecTask.new(:spec) do |spec|
   spec.libs << 'lib' << 'spec'

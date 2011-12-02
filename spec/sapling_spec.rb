@@ -17,7 +17,7 @@ describe "Sapling" do
       @sapling.activate_percentage(:chat, 20)
     end
     
-    it "activates the fature for that percentage of users" do
+    it "activates the feature for that percentage of users" do
       (1..120).select { |id| @sapling.active?(:chat, stub(:id => id)) }.length.should == 39
     end    
   end
@@ -33,11 +33,27 @@ describe "Sapling" do
     end
   end
   
-  describe "activating a specific user" 
+  describe "activating a specific user" do
+    before do
+      @sapling.activate_user(:chat, stub(:id => 2))
+    end
+    
+    it "activates the feature for that user" do
+      @sapling.should be_active(:chat, stub(:id => 2))
+    end      
+  end
     
       
-  describe "deactivating a specific user"
+  describe "deactivating a specific user" do
+    before do
+      @sapling.activate_user(:chat, stub(:id => 2))
+      @sapling.deactivate_user(:chat, stub(:id => 2))            
+    end
     
+    it "deactivates the feature for that user" do
+      @sapling.should_not be_active(:chat, :stub(:id => 2))
+    end    
+  end
   
 end
 # 
