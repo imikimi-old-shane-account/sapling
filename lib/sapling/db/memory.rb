@@ -1,9 +1,9 @@
 
 module Sapling
 module DB
-  class Memory < DBBase
+  class Memory < Base
 
-    class Feature < DBBase::Feature
+    class Feature < Base::Feature
       attr_accessor :users,:percentage
 
       def individually_active(user)
