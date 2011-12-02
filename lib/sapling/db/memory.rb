@@ -1,6 +1,4 @@
-
-module Sapling
-module DB
+module Sapling::DB
   class Memory < Base
 
     class Feature < Base::Feature
@@ -42,5 +40,4 @@ module DB
     end
 
   end
-end
 end

@@ -5,4 +5,8 @@ describe "SaplingDBMemory" do
   it "should init" do
     Sapling::DB::Memory.new
   end
+
+  it "should init" do
+    Sapling::DB::Memory.new
+  end
 end
