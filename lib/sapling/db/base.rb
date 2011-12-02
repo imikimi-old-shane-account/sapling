@@ -1,6 +1,4 @@
-module Sapling
-module DB
-
+module Sapling::DB
   class Base
     class Feature
       def initialize(users,percentage)
@@ -17,6 +15,4 @@ module DB
       end
     end
   end
-
-end
 end

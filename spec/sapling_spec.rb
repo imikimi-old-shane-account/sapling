@@ -29,7 +29,7 @@ describe "Sapling" do
     end
     
     it "becomes inactive for all users" do
-      @sapling.should_not be_active(:chat, :stub(:id => 24))
+      @sapling.should_not be_active(:chat, stub(:id => 24))
     end
   end
   
@@ -51,7 +51,7 @@ describe "Sapling" do
     end
     
     it "deactivates the feature for that user" do
-      @sapling.should_not be_active(:chat, :stub(:id => 2))
+      @sapling.should_not be_active(:chat, stub(:id => 2))
     end    
   end
   
