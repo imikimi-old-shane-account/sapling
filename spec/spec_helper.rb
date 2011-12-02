@@ -7,7 +7,10 @@ require 'rspec/autorun'
 require 'sapling_examples'
 
 class UserMock
-  def id;1;end
+  def initialize(i=1)
+    @id=i
+  end
+  def id;@id;end
 end
 
 RSpec.configure do |config|

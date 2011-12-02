@@ -9,7 +9,7 @@ module Sapling
         super
       end
 
-      def individually_active(user)
+      def individually_active?(user)
         users[user.id]
       end
 
@@ -38,7 +38,7 @@ module Sapling
 
     module ClientAPI
       def active?(feature,user)
-        (f = features[feature]) && f.active?(user)
+        (f = @features[feature]) && f.active?(user)
       end
     end
 
