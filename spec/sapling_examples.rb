@@ -1,11 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe "Sapling" do
-  before do
-    @db = Sapling::DB::Memory.new
-    @sapling = Sapling.new(@db)
-  end
-  
+shared_examples_for Sapling do
+      
   describe "features default to being disabled" do
     it "is not active for a specific user by default" do 
       @sapling.should_not be_active(:chat, stub(:id => 5))
