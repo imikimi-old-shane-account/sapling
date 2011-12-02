@@ -36,28 +36,35 @@ module Sapling
       @features={}
     end
 
-    def active?(feature,user)
-      (f = features[feature]) && f.active?(user)
+    module ClientAPI
+      def active?(feature,user)
+        (f = features[feature]) && f.active?(user)
+      end
     end
 
-    def activate_feature(feature)
-      features[feature]||=Feature.new
+    module AdminAPI
+      def activate_feature(feature)
+        features[feature]||=Feature.new
+      end
+
+      def activate_user(feature, user)
+        activate_feature(feature).activate_user(user)
+      end
+
+      def deactivate_user(feature, user)
+        (f=features[feature]) && f.deactivate_user(user)
+      end
+
+      def activate_percentage(feature, percentage)
+        activate_feature(feature).activate_percentage(percentage)
+      end
+
+      def deactivate_percentage(feature)
+        activate_feature(feature).deactivate_percentage
+      end
     end
 
-    def activate_user(feature, user)
-      activate_feature(feature).activate_user(user)
-    end
-
-    def deactivate_user(feature, user)
-      (f=features[feature]) && f.deactivate_user(user)
-    end
-
-    def activate_percentage(feature, percentage)
-      activate_feature(feature).activate_percentage(percentage)
-    end
-
-    def deactivate_percentage(feature)
-      activate_feature(feature).deactivate_percentage
-    end
+    include ClientAPI
+    include AdminAPI
   end
 end
