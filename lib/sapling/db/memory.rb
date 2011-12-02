@@ -4,6 +4,11 @@ module Sapling::DB
     class Feature < Base::Feature
       attr_accessor :users,:percentage
 
+      def initialize(users=[],percentage=0)
+        @users={}
+        super
+      end
+
       def individually_active(user)
         users[user.id]
       end

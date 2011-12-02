@@ -4,6 +4,10 @@ require 'sapling'
 require 'rspec'
 require 'rspec/autorun'
 
+class UserMock
+  def id;1;end
+end
+
 RSpec.configure do |config|
   # config.mock_with :mocha
   config.before { }

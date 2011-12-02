@@ -3,10 +3,10 @@ module Sapling::DB
     class Feature
       def initialize(users=[],percentage=0)
         self.percentage = percentage
-        self.users = users
+        users.each {|u| activate_user(u)}
       end
 
-      def percentage_active
+      def percentage_active(user)
         (user.id % 100) < percentage
       end
 
