@@ -1,7 +1,7 @@
 module Sapling
 module DB
 
-  class DBBase
+  class Base
     class Feature
       def initialize(users,percentage)
         self.percentage = percentage
