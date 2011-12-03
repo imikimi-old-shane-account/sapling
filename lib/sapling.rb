@@ -1,4 +1,5 @@
 require "sapling/version"
+require "sapling/util"
 require "sapling/base"
 require "sapling/memory"
 

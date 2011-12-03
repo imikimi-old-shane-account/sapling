@@ -1,16 +1,26 @@
 module Sapling
   class Memory < Base
 
-    class Feature < Base::Feature
+    class Feature
       attr_accessor :users,:percentage
 
-      def initialize(users=[],percentage=0)
+      def initialize
         @users={}
-        super
+        self.percentage = 0
+      end
+
+      # see Sapling::API::Client
+      def active?(options={})
+        options = Util::normalized_options(options)
+        individually_active?(options[:user]) || percentage_active?(options)
+      end
+
+      def percentage_active?(options={})
+        (Util.context_id(options) % 100) < percentage
       end
 
       def individually_active?(user)
-        users[user.id]
+        user && users[user.id]
       end
 
       def activate_user(user)
@@ -37,8 +47,10 @@ module Sapling
     end
 
     module ClientAPI
-      def active?(feature,user)
-        (f = @features[feature]) && f.active?(user)
+      # see Sapling::API::Client
+      def active?(feature, options={})
+        options = Util::normalized_options(options)
+        (f = @features[feature]) && f.active?(options)
       end
     end
 
