@@ -39,7 +39,6 @@ shared_examples_for Sapling do
     end
   end
 
-
   describe "deactivating a specific user" do
     before do
       @sapling.activate_user(:chat, stub(:id => 2))
@@ -48,6 +47,27 @@ shared_examples_for Sapling do
 
     it "deactivates the feature for that user" do
       @sapling.should_not be_active(:chat, stub(:id => 2))
+    end
+  end
+
+  describe "activating a specific generic integer" do
+    before do
+      @sapling.activate_user(:chat, 12345678)
+    end
+
+    it "activates the feature for that user" do
+      @sapling.should be_active(:chat, 12345678)
+    end
+  end
+
+  describe "deactivating a specific generic integer" do
+    before do
+      @sapling.activate_user(:chat, 12345678)
+      @sapling.deactivate_user(:chat, 12345678)
+    end
+
+    it "deactivates the feature for that user" do
+      @sapling.should_not be_active(:chat, 12345678)
     end
   end
 
