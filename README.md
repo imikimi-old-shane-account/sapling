@@ -8,4 +8,5 @@ seed a feature for specific users and/or a percentage of users.
 Heritage
 --------
 
-This is a port of the Rollout gem for use with ActiveRecord instead of Redis. We dropped the groups functionality.
+This is a port of the [Rollout Gem](https://github.com/jamesgolick/rollout) for
+use with ActiveRecord instead of Redis. We dropped the groups functionality.
