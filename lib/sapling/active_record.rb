@@ -1,82 +1,53 @@
 module Sapling
   class ActiveRecord < Base
 
-    class Feature
-      attr_accessor :users,:percentage
-
-      def initialize
-        @users={}
-        self.percentage = 0
-      end
-
-      # see Sapling::API::Client
-      def active?(options={})
-        options = Util::normalized_options(options)
-        individually_active?(options[:user]) || percentage_active?(options)
-      end
-
-      def percentage_active?(options={})
-        (Util.context_id(options) % 100) < percentage
-      end
-
-      def individually_active?(user)
-        user && users[user.id]
-      end
-
-      def activate_user(user)
-        users[user.id]=true
-      end
-
-      def deactivate_user(user)
-        users.delete(user.id)
-      end
-
-      def activate_percentage(percentage)
-        @percentage=percentage
-      end
-
-      def deactivate_percentage
-        @percentage=0
-      end
-    end
-
-    attr_accessor :features
-
-    def initialize
-      @features={}
+    def table_name
+      Model.table_name
     end
 
     module ClientAPI
       # see Sapling::API::Client
       def active?(feature, options={})
-        options = Util::normalized_options(options)
-        (f = @features[feature]) && f.active?(options)
+        options = Util.normalized_options options
+        v =Model.count(:conditions => [
+          "feature = ? AND ((user_id IS NOT NULL AND user_id = ?) OR (percentage IS NOT NULL AND ? < percentage)) ",
+          feature,
+          (u=options[:user]) && u.id,
+          ((c=options[:context_id]) && c%100) || 100
+        ])
+        v > 0
       end
     end
+    include ClientAPI
 
     module AdminAPI
-      def activate_feature(feature)
-        features[feature]||=Feature.new
-      end
 
       def activate_user(feature, user)
-        activate_feature(feature).activate_user(user)
+        Model.transaction do
+          deactivate_user(feature, user)
+          Model.create(:feature => feature, :user_id => user.id)
+        end
       end
 
       def deactivate_user(feature, user)
-        (f=features[feature]) && f.deactivate_user(user)
+        Model.delete_all ["feature = ? AND percentage IS NULL and user_id = ?",feature,user.id]
       end
 
       def activate_percentage(feature, percentage)
-        activate_feature(feature).activate_percentage(percentage)
+        raise "invalid percentage #{percentage.inspect}" unless percentage.kind_of?(Integer) && percentage>=0 && percentage<=100
+        Model.transaction do
+          deactivate_percentage(feature)
+          Model.create(:feature => feature, :percentage => percentage)
+        end
       end
 
       def deactivate_percentage(feature)
-        activate_feature(feature).deactivate_percentage
+        Model.delete_all ["feature = ? AND percentage IS NOT NULL AND user_id IS NULL",
+          feature
+        ]
       end
     end
 
-    include ClientAPI
     include AdminAPI
   end
 end

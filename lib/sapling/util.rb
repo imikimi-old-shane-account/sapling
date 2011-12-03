@@ -7,9 +7,14 @@ module Sapling
 
       def normalized_options(options)
         case options
-        when Hash then options
-        when Integer then {:context_id => options}
-        else {:user => options}
+        when Hash then
+          options[:context_id] ||= options[:user].id
+          options
+        when Integer then
+          {:context_id => options}
+        else
+          user=options
+          {:user => user, :context_id => user.id}
         end
       end
     end
