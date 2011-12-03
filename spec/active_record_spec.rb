@@ -8,7 +8,8 @@ describe "Sapling::ActiveRecord" do
         :adapter  => 'sqlite3',
         :database => ':memory:'
       )
-      
+      sql = File.read(File.expand_path(File.dirname(__FILE__) + '/../db/create.sql'))
+      ActiveRecord::Base.connection.execute sql
       @sapling = Sapling::ActiveRecord.new
     end
     
