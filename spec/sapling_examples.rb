@@ -60,6 +60,33 @@ shared_examples_for Sapling do
     end
   end
 
+  describe "fetching all features" do
+    before do
+      @sapling.activate_user(:chat, stub(:id => 2))
+      @sapling.activate_user(:chat, stub(:id => 3))
+      @sapling.activate_user(:pwn, stub(:id => 2))
+    end
+
+    it "returns only two features" do
+      @sapling.features.should == [:chat, :pwn]
+    end
+  end
+
+  describe "fetching all active features for a user" do
+    before do
+      @sapling.activate_percentage(:bicycle, 10)
+      @sapling.activate_user(:chat, stub(:id => 115))
+      @sapling.activate_user(:pwn, stub(:id => 102))
+      @sapling.activate_user(:juggle, stub(:id => 115))
+    end
+
+    it "should return only the active features for the specific user" do
+      @sapling.active_features(:user => stub(:id => 102)).should == [:bicycle, :pwn]
+      @sapling.active_features(:user => stub(:id => 115)).should == [:chat, :juggle]
+    end
+  end
+
+
 end
 #
 #

@@ -40,8 +40,6 @@ module Sapling
       end
     end
 
-    attr_accessor :features
-
     def initialize
       @features={}
     end
@@ -52,11 +50,20 @@ module Sapling
         options = Util::normalized_options(options)
         (f = @features[feature]) && f.active?(options)
       end
+
+      def features
+        @features.keys.sort_by {|k| k.to_s}
+      end
+
+      # see Sapling::API::Client
+      def active_features(options={})
+        features.select {|feature| active?(feature,options)}
+      end
     end
 
     module AdminAPI
       def activate_feature(feature)
-        features[feature]||=Feature.new
+        @features[feature]||=Feature.new
       end
 
       def activate_user(feature, user)
@@ -64,7 +71,7 @@ module Sapling
       end
 
       def deactivate_user(feature, user)
-        (f=features[feature]) && f.deactivate_user(user)
+        (f=@features[feature]) && f.deactivate_user(user)
       end
 
       def activate_percentage(feature, percentage)
