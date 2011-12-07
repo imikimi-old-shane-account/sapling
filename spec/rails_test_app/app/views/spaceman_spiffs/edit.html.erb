@@ -1,0 +1,16 @@
+<h1>Editing spaceman_spiff</h1>
+
+<% form_for(@spaceman_spiff) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @spaceman_spiff %> |
+<%= link_to 'Back', spaceman_spiffs_path %>

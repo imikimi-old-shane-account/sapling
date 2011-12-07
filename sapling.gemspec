@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
   s.add_runtime_dependency "activerecord", ">2.3"
   s.add_development_dependency "rspec", "~>2.7.0"
+  s.add_development_dependency "rails", "2.3.12"
   s.add_development_dependency "mocha"
   s.add_development_dependency "sqlite3", "~>1.3.4"
 end
