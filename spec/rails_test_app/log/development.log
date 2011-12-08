@@ -1,0 +1,131 @@
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("schema_migrations")[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateSpacemanSpiffs (20111207234232)
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "spaceman_spiffs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20111207234232')[0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.1ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("spaceman_spiffs")[0m
+
+
+Processing SpacemanSpiffsController#index (for 127.0.0.1 at 2011-12-07 15:46:09) [GET]
+  [4;36;1mSpacemanSpiff Load (0.4ms)[0m   [0;1mSELECT * FROM "spaceman_spiffs" [0m
+Rendering template within layouts/spaceman_spiffs
+Rendering spaceman_spiffs/index
+Completed in 39ms (View: 35, DB: 0) | 200 OK [http://localhost/spaceman_spiffs]
+
+
+Processing SpacemanSpiffsController#new (for 127.0.0.1 at 2011-12-07 15:46:12) [GET]
+Rendering template within layouts/spaceman_spiffs
+Rendering spaceman_spiffs/new
+Completed in 21ms (View: 16, DB: 0) | 200 OK [http://localhost/spaceman_spiffs/new]
+
+
+Processing SpacemanSpiffsController#create (for 127.0.0.1 at 2011-12-07 15:46:15) [POST]
+  Parameters: {"authenticity_token"=>"NX8QUIdii19RT+86wnf0rGr1h7dGiMCUhBrKdKK3Jzs=", "spaceman_spiff"=>{"name"=>"Calvin"}, "commit"=>"Create"}
+  [4;35;1mSpacemanSpiff Create (0.4ms)[0m   [0mINSERT INTO "spaceman_spiffs" ("name", "created_at", "updated_at") VALUES('Calvin', '2011-12-07 23:46:15', '2011-12-07 23:46:15')[0m
+Redirected to http://localhost:3000/spaceman_spiffs/1
+Completed in 8ms (DB: 0) | 302 Found [http://localhost/spaceman_spiffs]
+
+
+Processing SpacemanSpiffsController#show (for 127.0.0.1 at 2011-12-07 15:46:15) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mSpacemanSpiff Load (0.1ms)[0m   [0;1mSELECT * FROM "spaceman_spiffs" WHERE ("spaceman_spiffs"."id" = 1) [0m
+Rendering template within layouts/spaceman_spiffs
+Rendering spaceman_spiffs/show
+Completed in 13ms (View: 7, DB: 0) | 200 OK [http://localhost/spaceman_spiffs/1]
+
+
+Processing SpacemanSpiffsController#index (for 127.0.0.1 at 2011-12-07 15:46:18) [GET]
+  [4;35;1mSpacemanSpiff Load (0.3ms)[0m   [0mSELECT * FROM "spaceman_spiffs" [0m
+Rendering template within layouts/spaceman_spiffs
+Rendering spaceman_spiffs/index
+Completed in 7ms (View: 4, DB: 0) | 200 OK [http://localhost/spaceman_spiffs]
+
+
+Processing SpacemanSpiffsController#index (for 127.0.0.1 at 2011-12-07 15:46:19) [GET]
+  [4;36;1mSpacemanSpiff Load (0.3ms)[0m   [0;1mSELECT * FROM "spaceman_spiffs" [0m
+Rendering template within layouts/spaceman_spiffs
+Rendering spaceman_spiffs/index
+Completed in 7ms (View: 4, DB: 0) | 200 OK [http://localhost/spaceman_spiffs]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2011-12-07 15:54:16) [GET]
+
+ActionController::RoutingError (No route matches "/user_session/set_manually" with {:method=>:get}):
+  <internal:prelude>:10:in `synchronize'
+  /Users/navyrain/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/navyrain/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/navyrain/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing UserSessionsController#set_manually (for 127.0.0.1 at 2011-12-07 15:54:47) [GET]
+
+ActionView::MissingTemplate (Missing template user_sessions/set_manually.erb in view path /Users/navyrain/Documents/imikimi/sapling/spec/rails_test_app/app/views):
+  <internal:prelude>:10:in `synchronize'
+  /Users/navyrain/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/navyrain/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/navyrain/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing UserSessionsController#set_manually (for 127.0.0.1 at 2011-12-07 15:55:05) [GET]
+
+ActionView::MissingTemplate (Missing template user_sessions/show.erb in view path /Users/navyrain/Documents/imikimi/sapling/spec/rails_test_app/app/views):
+  app/controllers/user_sessions_controller.rb:11:in `set_manually'
+  <internal:prelude>:10:in `synchronize'
+  /Users/navyrain/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/navyrain/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/navyrain/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing UserSessionsController#set_manually (for 127.0.0.1 at 2011-12-07 15:55:12) [GET]
+
+ActionView::MissingTemplate (Missing template user_sessions/show.erb in view path /Users/navyrain/Documents/imikimi/sapling/spec/rails_test_app/app/views):
+  app/controllers/user_sessions_controller.rb:11:in `set_manually'
+  <internal:prelude>:10:in `synchronize'
+  /Users/navyrain/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/navyrain/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/navyrain/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing UserSessionsController#show (for 127.0.0.1 at 2011-12-07 15:55:30) [GET]
+Completed in 2ms (View: 0, DB: 0) | 200 OK [http://localhost/user_sessions]
+
+
+Processing UserSessionsController#show (for 127.0.0.1 at 2011-12-07 15:55:43) [GET]
+Completed in 2ms (View: 0, DB: 0) | 200 OK [http://localhost/user_sessions]
+
+
+Processing UserSessionsController#set_manually (for 127.0.0.1 at 2011-12-07 15:55:53) [GET]
+  Parameters: {"user_id"=>"2"}
+Completed in 2ms (View: 0, DB: 0) | 200 OK [http://localhost/user_sessions/set_manually?user_id=2]
+
+
+Processing UserSessionsController#show (for 127.0.0.1 at 2011-12-07 15:55:56) [GET]
+Completed in 2ms (View: 0, DB: 0) | 200 OK [http://localhost/user_sessions]
