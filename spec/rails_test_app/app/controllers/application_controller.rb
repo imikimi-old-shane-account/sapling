@@ -9,7 +9,9 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
   
   def current_user
-    User.new(:id => current_user_id)
+    u = User.new
+    u.id = session[:current_user_id]
+    u
   end
   
   def current_user_id

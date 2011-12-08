@@ -1,7 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: Calvin
+  name: MyString
 
 two:
-  name: Hobbes
+  name: MyString

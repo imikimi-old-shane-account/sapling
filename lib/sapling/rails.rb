@@ -1,1 +1,1 @@
-
+require 'sapling/rails/action_controller'

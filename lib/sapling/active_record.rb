@@ -10,9 +10,9 @@ module Sapling
       ret=[
         "#{'feature = ? AND ' if feature} ((user_id IS NOT NULL AND user_id = ?) OR (percentage IS NOT NULL AND ? < percentage)) "
       ]
-      ret<<feature if feature
+      ret<<feature.to_s if feature
       ret+=[
-        (u=normalized_options[:user]) && u.id,
+        normalized_options[:user_id],
         ((c=normalized_options[:context_id]) && c%100) || 100
       ]
       ret

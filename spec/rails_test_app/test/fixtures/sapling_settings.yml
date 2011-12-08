@@ -1,7 +1,5 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: Calvin
-
-two:
-  name: Hobbes
+calvin_allowed:
+  feature: listing
+  user_id: 1

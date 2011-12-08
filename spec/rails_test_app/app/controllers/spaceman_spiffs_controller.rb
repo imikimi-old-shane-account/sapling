@@ -2,11 +2,15 @@ class SpacemanSpiffsController < ApplicationController
   # GET /spaceman_spiffs
   # GET /spaceman_spiffs.xml
   def index
-    @spaceman_spiffs = SpacemanSpiff.all
+    if feature_active?(:listing)
+      @spaceman_spiffs = SpacemanSpiff.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @spaceman_spiffs }
+      respond_to do |format|
+        format.html # index.html.erb
+        format.xml  { render :xml => @spaceman_spiffs }
+      end
+    else 
+      render :nothing => true, :status => :forbidden
     end
   end
 
