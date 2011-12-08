@@ -6,16 +6,9 @@ module Sapling
       end
 
       def normalized_options(options)
-        case options
-        when Hash then
-          options[:context_id] ||= options[:user].id
-          options
-        when Integer then
-          {:context_id => options}
-        else
-          user=options
-          {:user => user, :context_id => user.id}
-        end
+        options[:user_id] ||= options[:user].id if options[:user]
+        options[:context_id] ||= options[:user_id] || (raise ArgumentError.new("context_id, user_id or user required"))
+        options
       end
     end
   end

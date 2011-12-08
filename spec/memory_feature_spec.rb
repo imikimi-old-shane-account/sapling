@@ -5,9 +5,9 @@ describe "Sapling::Memory::Feature" do
     f=Sapling::Memory::Feature.new
     u=UserMock.new
 
-    f.active?(u).should be_false
+    f.active?(:user=>u).should be_false
     f.activate_user(u)
 
-    f.active?(u).should be_true
+    f.active?(:user=>u).should be_true
   end
 end
