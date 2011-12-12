@@ -1,3 +1,5 @@
+require 'action_controller'
+
 module Sapling::ActionControllerExt
   def feature_active?(feature, options={})
     options[:user] ||= current_user

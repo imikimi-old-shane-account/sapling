@@ -19,8 +19,8 @@ class CssGenerator
     inactive_features = features - active_features
 
     [
-    active_features.collect   {|f|".#{prefix}_#{f}_off { display:hidden !important; }"},
-    inactive_features.collect {|f|".#{prefix}_#{f}_on { display:hidden !important; }"},
+    active_features.collect   {|f|".#{prefix}_#{f.to_s}_off { display:hidden !important; }"},
+    inactive_features.collect {|f|".#{prefix}_#{f.to_s}_on { display:hidden !important; }"},
     ].flatten.join("\n")
   end
 end
