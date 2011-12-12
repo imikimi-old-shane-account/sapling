@@ -7,6 +7,14 @@ shared_examples_for Sapling do
       @sapling.should_not be_active(:chat, :user => stub(:id => 5))
     end
   end
+  
+  describe "nothing activated" do
+
+    it "should not be active without a context or user" do
+      @sapling.should_not be_active(:chat)
+    end
+  end
+  
 
   describe "activating a percentage" do
     before do
@@ -16,6 +24,26 @@ shared_examples_for Sapling do
     it "activates the feature for that percentage of users" do
       (1..1000).select { |id| @sapling.active?(:chat, :user=>UserMock.new(id)) }.length.should == 200
     end
+    
+    it "should not be active without a context or user" do
+      @sapling.should_not be_active(:chat)
+    end
+    
+  end
+  
+  describe "activating a 100 percent" do
+    before do
+      @sapling.activate_percentage(:chat, 20)
+    end
+
+    it "activates the feature for that percentage of users" do
+      (1..1000).select { |id| @sapling.active?(:chat, :user=>UserMock.new(id)) }.length.should == 200
+    end
+    
+    it "should be active even without a context or user" do
+      @sapling.should_be_active(:chat)
+    end
+    
   end
 
   describe "deactivating a percentage" do
@@ -27,6 +55,11 @@ shared_examples_for Sapling do
     it "becomes inactive for all users" do
       @sapling.should_not be_active(:chat, :user => stub(:id => 24))
     end
+
+    it "should not be active without a context or user" do
+      @sapling.should_not be_active(:chat)
+    end
+        
   end
 
   describe "activating a specific user" do
@@ -37,6 +70,10 @@ shared_examples_for Sapling do
     it "activates the feature for that user" do
       @sapling.should be_active(:chat, :user => stub(:id => 2))
     end
+    
+    it "should not be active without a context or user" do
+      @sapling.should_not be_active(:chat)
+    end    
   end
 
   describe "deactivating a specific user" do
