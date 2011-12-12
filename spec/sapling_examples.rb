@@ -41,7 +41,7 @@ shared_examples_for Sapling do
     end
     
     it "should be active even without a context or user" do
-      @sapling.should_be_active(:chat)
+      @sapling.should be_active(:chat)
     end
     
   end
