@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   
   def current_user
     u = User.new
-    u.id = session[:current_user_id]
+    u.id = session[:current_user_id] 
     u
   end
   

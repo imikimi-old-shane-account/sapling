@@ -22,4 +22,9 @@ class FeatureTest < ActionController::IntegrationTest
     assert_response :forbidden
   end
 
+  test "has a feature_on block" do
+    # TODO
+  end
+
+
 end

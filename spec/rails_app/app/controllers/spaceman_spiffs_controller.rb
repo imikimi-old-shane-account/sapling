@@ -13,6 +13,9 @@ class SpacemanSpiffsController < ApplicationController
       render :nothing => true, :status => :forbidden
     end
   end
+  
+  def multiple_features
+  end
 
   # GET /spaceman_spiffs/1
   # GET /spaceman_spiffs/1.xml

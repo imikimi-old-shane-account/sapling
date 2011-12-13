@@ -11,6 +11,10 @@ class CssGenerator
   def prefix
     "sapling_css"
   end
+  
+  def css_class(feature, on)
+    "#{prefix}_#{feature.to_s}_#{on ? 'on' : 'off'}"
+  end
 
   # see Sapling::API::Client for options
   def to_s(options={})
@@ -19,8 +23,8 @@ class CssGenerator
     inactive_features = features - active_features
 
     [
-    active_features.collect   {|f|".#{prefix}_#{f.to_s}_off { display:hidden !important; }"},
-    inactive_features.collect {|f|".#{prefix}_#{f.to_s}_on { display:hidden !important; }"},
+    active_features.collect   {|f|".#{css_class(f, false)} { display:none !important; }"},
+    inactive_features.collect {|f|".#{css_class(f, true)} { display:none !important; }"},
     ].flatten.join("\n")
   end
 end

@@ -19,7 +19,7 @@ describe "Sapling::CssGenerator" do
     end
 
     it "outputs css" do
-      Sapling::CssGenerator.new(@sapling).to_s(:user => stub(:id => 1)).should == ".sapling_css_chat_off { display:hidden !important; }"
+      Sapling::CssGenerator.new(@sapling).to_s(:user => stub(:id => 1)).should == ".sapling_css_chat_off { display:none !important; }"
     end
   end
 
@@ -34,14 +34,14 @@ describe "Sapling::CssGenerator" do
     it "test user bicycle & pwn user" do
       output = Sapling::CssGenerator.new(@sapling).to_s(:user => stub(:id => 102))
       %w{ bicycle_off chat_on juggle_on pwn_off }.each do |key|
-        output.should =~ /#{key}[^}]+?display:hidden/
+        output.should =~ /#{key}[^}]+?display:none/
       end
     end
 
     it "test chat & juggle user" do
       output = Sapling::CssGenerator.new(@sapling).to_s(:user => stub(:id => 115))
       %w{ bicycle_on chat_off juggle_off pwn_on }.each do |key|
-        output.should =~ /#{key}[^}]+?display:hidden/
+        output.should =~ /#{key}[^}]+?display:none/
       end
     end
   end
