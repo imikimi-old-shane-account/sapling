@@ -31,7 +31,7 @@ shared_examples_for Sapling do
     
   end
   
-  describe "activating a 100 percent" do
+  describe "activating a 20 percent" do
     before do
       @sapling.activate_percentage(:chat, 20)
     end
@@ -40,11 +40,27 @@ shared_examples_for Sapling do
       (1..1000).select { |id| @sapling.active?(:chat, :user=>UserMock.new(id)) }.length.should == 200
     end
     
+    it "should not be active even without a context or user" do
+      @sapling.should be_active(:chat)
+    end
+    
+  end
+
+  describe "activating a 100 percent" do
+    before do
+      @sapling.activate_percentage(:chat, 100)
+    end
+
+    it "activates the feature for that percentage of users" do
+      (1..1000).select { |id| @sapling.active?(:chat, :user=>UserMock.new(id)) }.length.should == 1000
+    end
+    
     it "should be active even without a context or user" do
       @sapling.should be_active(:chat)
     end
     
   end
+
 
   describe "deactivating a percentage" do
     before do
