@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :spaceman_spiffs, :collection => {:multiple_features => :get }
   map.resource :user_sessions, :collection => {:set_manually => :get }
   
-  map.sapling_stylesheet 'sapling/stylesheet.css', :controller => 'sapling', :action => 'stylesheet'
+  # map.sapling_stylesheet 'sapling/stylesheet.css', :controller => 'sapling', :action => 'stylesheet'
 
   # The priority is based upon order of creation: first created -> highest priority.
 
