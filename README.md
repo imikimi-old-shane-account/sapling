@@ -10,3 +10,14 @@ Heritage
 
 This is a port of the [rollout gem](https://github.com/jamesgolick/rollout) for
 use with ActiveRecord instead of Redis. We dropped the groups functionality, but otherwise we mirrored the API.
+
+Instructions
+------------
+
+Add a route to your routes file. Feel free to change the 'sapling/stylesheet.css' to whatever you want.
+
+    map.sapling_stylesheet 'sapling/stylesheet.css', :controller => 'sapling', :action => 'stylesheet'
+
+In your application layout header, add:
+
+    <%= stylesheet_link_tag sapling_stylesheet_path %>
