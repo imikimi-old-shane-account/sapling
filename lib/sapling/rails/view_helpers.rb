@@ -3,16 +3,16 @@ module Sapling
 
     # include ActionView::Helpers::CaptureHelper
     def feature_on(feature, &block)
-      feature_block(sapling_css_generator.css_class(feature, true), &block)
+      feature_block(sapling_css_generator.css_class(feature, "style=\"display:none;\"", true), &block)
     end
 
     def feature_off(feature, &block)
-      feature_block(sapling_css_generator.css_class(feature, false), &block)    
+      feature_block(sapling_css_generator.css_class(feature, nil, false), &block)    
     end
 
     private
-    def feature_block(css_class, &block)
-      concat "<span class=\"#{css_class}\">"
+    def feature_block(css_class, params, &block)
+      concat "<span class=\"#{css_class}\" #{params}>"
       block.call 
       concat "</span>"
     end
