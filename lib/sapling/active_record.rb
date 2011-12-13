@@ -13,7 +13,7 @@ module Sapling
       ret<<feature.to_s if feature
       ret+=[
         normalized_options[:user_id],
-        ((c=normalized_options[:context_id]) && c%100) || 100
+        Util::modded_context_id(normalized_options)
       ]
       ret
     end

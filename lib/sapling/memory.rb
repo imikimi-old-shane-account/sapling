@@ -11,12 +11,12 @@ module Sapling
 
       # see Sapling::API::Client
       def active?(options={})
-        options = Util::normalized_options(options)
+        options = Util.normalized_options(options)
         individually_active?(options[:user]) || percentage_active?(options)
       end
 
       def percentage_active?(options={})
-        (Util.context_id(options) % 100) < percentage
+        (Util.modded_context_id(options)) < percentage
       end
 
       def individually_active?(user)
@@ -47,7 +47,7 @@ module Sapling
     module ClientAPI
       # see Sapling::API::Client
       def active?(feature, options={})
-        options = Util::normalized_options(options)
+        options = Util.normalized_options(options)
         (f = @features[feature]) && f.active?(options)
       end
 
