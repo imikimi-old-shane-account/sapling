@@ -1,0 +1,15 @@
+/* Chat Defaults */
+.sapling_feature_chat.enabled {
+  display: none;
+}
+.sapling_feature_chat.disabled {
+  display: block;
+}
+
+/* Chat Enabled */
+html.sapling_feature_chat_on .sapling_feature_chat.enabled {
+  display: block;
+}
+html.sapling_feature_chat_on .sapling_feature_chat.disabled {
+  display: none;
+}

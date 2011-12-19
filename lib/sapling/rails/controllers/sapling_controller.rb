@@ -1,7 +1,6 @@
-class SaplingController < ApplicationController
-  def stylesheet
-    styles = sapling_css_generator.to_s(:user => current_user, :context_id => (request.session_options[:id] if request.session))
-    # styles = "boo"
-    render :text => styles, :content_type => 'text/css'
+class SaplingController < ApplicationController  
+  def script
+    js = sapling_js_generator.generate(:user => current_user, :context_id => (request.session_options[:id] if request.session))
+    render :text => js, :content_type => 'text/javascript'
   end
 end

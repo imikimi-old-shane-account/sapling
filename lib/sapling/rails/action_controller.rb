@@ -11,13 +11,13 @@ module Sapling::ActionControllerExt
     @@sapling ||= Sapling::ActiveRecord.new
   end
   
-  def sapling_css_generator
-    @@sapling_css_generator ||= Sapling::CssGenerator.new(sapling)
+  def sapling_js_generator
+    @@sapling_js_generator ||= Sapling::JavascriptGenerator.new(sapling)
   end
   
 end
 
 class ActionController::Base
   include Sapling::ActionControllerExt
-  helper_method :feature_active?, :sapling, :sapling_css_generator
+  helper_method :feature_active?, :sapling, :sapling_js_generator
 end

@@ -16,8 +16,7 @@ Instructions
 
 Add a route to your routes file. Feel free to change the 'sapling/stylesheet.css' to whatever you want.
 
-    map.sapling_stylesheet 'sapling/stylesheet.css', :controller => 'sapling', :action => 'stylesheet'
+    map.sapling_script 'sapling/script.js', :controller => 'sapling', :action => 'script'
 
-In your application layout header, add:
-
-    <%= stylesheet_link_tag sapling_stylesheet_path %>
+After including your javascript library, add this:
+    <%= javascript_include_tag sapling_script_path %>

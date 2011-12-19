@@ -1,7 +1,7 @@
-<% feature_on(:chat) do %>
-  SPIFF CHAT ENABLED
-<% end %>
+<div class="<%= feature_class(:chat) %> enabled">
+  REJOICE - SPIFF CHAT ENABLED FOR YOU
+</div>
 
-<% feature_off(:chat) do %>
-  SPIFF CHAT FORSAKEN
-<% end %>
+<div class="<%= feature_class(:chat) %> disabled">
+  DESPAIR - SPIFF CHAT NOT ENABLED FOR YOU
+</div>
