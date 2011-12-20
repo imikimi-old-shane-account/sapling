@@ -24,7 +24,7 @@ class Sapling::JavascriptGenerator
 
   # see Sapling::API::Client for options
   
-  def js_for_feature(feature, on)
+  def mootools_for_feature(feature, on)
     "html.removeClass('" + css_toggle_class(feature,!on) + "');html.addClass('" + css_toggle_class(feature,on) + "');"
   end
   
@@ -38,8 +38,8 @@ class Sapling::JavascriptGenerator
 (function() {
   if (window.MooTools) {
     html = $$('html')[0];
-    #{inactive_features.map{|f| js_for_feature(f,false) }.join}
-    #{active_features.map{|f| js_for_feature(f,true) }.join}    
+    #{inactive_features.map{|f| mootools_for_feature(f,false) }.join}
+    #{active_features.map{|f| mootools_for_feature(f,true) }.join}    
   }
 })();
 END
