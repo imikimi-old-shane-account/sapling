@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Sapling::VERSION
   s.authors     = ["Shane Brinkman-Davis", "Jason Strutz"]
   s.email       = ["shanebdavis@imikimi.com", "jason@cumuluscode.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/imikimi/sapling"
   s.summary     = %q{Incrementally roll out your features. Uses ActiveRecord to store configuration and supports client-side roll-out of cached pages.}
   s.description = %q{Sapling lets you seed your new features to just a few users at a time. You can change which and how many users are seeded for a feature dynamically by updating the database via the Sapling API. Core features are the ability to seed a feature for specific users and/or a percentage of users.}
 
