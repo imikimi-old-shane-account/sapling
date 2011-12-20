@@ -3,10 +3,6 @@ require 'sapling/rails/view_helpers'
 
 ActiveSupport::Dependencies.autoload_paths << File.expand_path(File.join(File.dirname(__FILE__), "rails", "controllers"))
 
-ActionController::Routing::Routes.draw do |map|
-  map.sapling_stylesheet 'sapling/stylesheet.css', :controller => 'sapling', :action => 'stylesheet'
-end
-
 if defined?(Rails)
   if Rails.version =~ /^3\./
     # Haven't tested this
