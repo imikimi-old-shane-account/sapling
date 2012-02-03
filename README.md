@@ -99,12 +99,12 @@ You can optionally inject your own code for testing if a feature is active. In r
 Client-side Usage
 -----------------
 
-Sapling include a javascript helper which add and remove classes on the HTML element for a given user, based upon the
+Sapling include a javascript helper which adds and removes classes on the HTML element for a given user, based upon the
 features available to that user.
 
-Given the feature `space_chat`, if it is enabled for the given user, the html root will get an class `sapling_feature_space_chat_on`.  If disabled for the given user, the class will be `sapling_feature_space_chat_off`.
+Given the feature `space_chat`, if it is enabled for the given user, the html root will get the class `sapling_feature_space_chat_on`.  If disabled for the given user, the class will be `sapling_feature_space_chat_off`.
 
-To retrieve the class name for a given feature, you can use the `sapling_js_generator.css_container_class(feature)` and `sapling_js_generator.css_toggle_class(feature, on? (boolean) )` helpers in your ERB files.
+To retrieve the class name for a given feature, you can use `sapling.css_class(feature)` and `sapling.css_toggle_class(feature, on? (boolean) )` in your ERB files.
 
 Using the client-side tools, you can define CSS classes which will be visible/invisible when a feature is enabled/disabled.  For example:
 
