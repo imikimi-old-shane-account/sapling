@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.join(File.dirname(__FILE__),"..",'test_helper')
 
 class FeatureTest < ActionController::IntegrationTest
   fixtures :all
@@ -8,6 +8,13 @@ class FeatureTest < ActionController::IntegrationTest
     post user_sessions_path, :user_id => 1
     get user_sessions_path
     assert_equal '1', response.body
+  end
+
+  # Replace this with your real tests.
+  test "js generation works" do
+    post user_sessions_path, :user_id => 1
+    get "/sapling/script.js"
+    assert response.body['sapling_feature_my_custom_test_feature_on']
   end
 
   test "users cant use 'my_custom_test_feature'" do

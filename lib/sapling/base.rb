@@ -11,22 +11,15 @@ module Sapling
     private
     def active_internal(feature_name,options)
       feature_method = "#{feature_name}_active?".to_sym
+      base_active = (f=features[feature_name]) && f.active?(options)
       if controller && controller.respond_to?(feature_method)
         # use override
-        controller.send(feature_method,options.merge(:feature => features[feature_name]))
+        controller.send(feature_method,options.merge(:feature => features[feature_name],:active => base_active))
       else
-        (f=features[feature_name]) && f.active?(options)
+        base_active
       end
     end
 
-    # override feature test example for feature :new_homepage
-    # options:
-    #   feature is of type Feature
-    #   :user
-    # returns true if the feature is enabled
-    # def new_homepage_active?(options={})
-    #  # your test here
-    # end
     public
 
     # see Sapling::API::Client
@@ -45,7 +38,7 @@ module Sapling
     end
 
     def js_generator
-      @js_generator ||= JavascriptGenerator.new
+      @js_generator ||= JavascriptGenerator.new(self)
     end
 
     def css_class_prefix
