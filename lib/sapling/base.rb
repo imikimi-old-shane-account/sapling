@@ -39,7 +39,9 @@ module Sapling
     # see Sapling::API::Client
     def active_features(options={})
       options = Util.normalized_options options, controller
-      features.select {|feature_name,feature| active_internal(feature_name,options)}
+      ret={}
+      features.each {|feature_name,feature| ret[feature_name]=feature if active_internal(feature_name,options)}
+      ret
     end
 
     def js_generator

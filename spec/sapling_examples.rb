@@ -150,7 +150,7 @@ shared_examples_for Sapling do
 
     class Override
       def chat_active?(options)
-        options[:user].name[0]=="f"
+        !!options[:user].name[/^f/]
       end
     end
 
