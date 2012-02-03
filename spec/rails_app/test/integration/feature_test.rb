@@ -10,6 +10,22 @@ class FeatureTest < ActionController::IntegrationTest
     assert_equal '1', response.body
   end
 
+  test "users cant use 'my_custom_test_feature'" do
+    # user1 is listed, user2 is not
+    assert Sapling::ActiveRecord.new.features[:my_custom_test_feature].users[1]
+    assert_nil Sapling::ActiveRecord.new.features[:my_custom_test_feature].users[2]
+
+    # but user1 is denied
+    post user_sessions_path, :user_id => 1
+    get custom_test_feature_spaceman_spiffs_path
+    assert_equal '0', response.body
+
+    # and user2 is permitted
+    post user_sessions_path, :user_id => 2
+    get custom_test_feature_spaceman_spiffs_path
+    assert_equal '1', response.body
+  end
+
   test "listing is enabled for user one" do
     post user_sessions_path, :user_id => 1
     get spaceman_spiffs_path

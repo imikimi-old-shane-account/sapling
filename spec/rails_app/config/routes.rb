@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :spaceman_spiffs, :collection => {:multiple_features => :get }
+  map.resources :spaceman_spiffs, :collection => {:multiple_features => :get, :custom_test_feature => :get }
   map.resource :user_sessions, :collection => {:set_manually => :get }
-  
+
   map.sapling_script 'sapling/script.js', :controller => 'sapling', :action => 'script'
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -22,7 +22,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # Sample resource route with sub-resources:
   #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
-  
+
   # Sample resource route with more complex sub-resources
   #   map.resources :products do |products|
   #     products.resources :comments

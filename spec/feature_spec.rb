@@ -1,8 +1,8 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe "Sapling::Memory::Feature" do
+describe "Sapling::Feature" do
   it "should support activating users" do
-    f=Sapling::Memory::Feature.new
+    f=Sapling::Feature.new
     u=UserMock.new
 
     f.active?(:user=>u).should be_false

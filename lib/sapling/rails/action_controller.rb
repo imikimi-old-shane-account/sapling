@@ -5,16 +5,14 @@ module Sapling::ActionControllerExt
     options[:user] ||= current_user
     sapling.active?(feature, options)
   end
-  
-  
+
   def sapling
-    @@sapling ||= Sapling::ActiveRecord.new
+    @sapling ||= Sapling::ActiveRecord.new(self)
   end
-  
+
   def sapling_js_generator
-    @@sapling_js_generator ||= Sapling::JavascriptGenerator.new(sapling)
+    @sapling_js_generator ||= Sapling::JavascriptGenerator.new
   end
-  
 end
 
 class ActionController::Base

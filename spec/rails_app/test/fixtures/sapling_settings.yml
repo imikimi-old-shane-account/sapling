@@ -4,6 +4,10 @@ calvin_allowed:
   feature: listing
   user_id: 1
 
+calvin_not_allowed:
+  feature: my_custom_test_feature
+  user_id: 1
+
 hobbes_allowed:
   feature: chat
   user_id: 2

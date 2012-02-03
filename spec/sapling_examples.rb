@@ -40,11 +40,11 @@ shared_examples_for Sapling do
       (1..1000).select { |id| @sapling.active?(:chat, :user=>UserMock.new(id)) }.length.should == 200
     end
 
-    
+
     it "should not be active even without a context or user" do
       @sapling.should_not be_active(:chat)
     end
-    
+
   end
 
   describe "activating a 100 percent" do
@@ -55,7 +55,7 @@ shared_examples_for Sapling do
     it "activates the feature for that percentage of users" do
       (1..1000).select { |id| @sapling.active?(:chat, :user=>UserMock.new(id)) }.length.should == 1000
     end
-    
+
 
     it "should be active even without a context or user" do
       @sapling.should be_active(:chat)
@@ -123,7 +123,7 @@ shared_examples_for Sapling do
     end
 
     it "returns only two features" do
-      @sapling.features.should == [:chat, :pwn]
+      @sapling.features.keys.should == [:chat, :pwn]
     end
   end
 
@@ -136,8 +136,30 @@ shared_examples_for Sapling do
     end
 
     it "should return only the active features for the specific user" do
-      @sapling.active_features(:user => stub(:id => 102)).should == [:bicycle, :pwn]
-      @sapling.active_features(:user => stub(:id => 115)).should == [:chat, :juggle]
+      @sapling.active_features(:user => stub(:id => 102)).keys.should == [:bicycle, :pwn]
+      @sapling.active_features(:user => stub(:id => 115)).keys.should == [:chat, :juggle]
+    end
+  end
+
+  describe "test custom override" do
+    before do
+      @sapling.activate_user(:chat,   stub(:id => 115,:name=>"fred"))
+      @sapling.activate_user(:chat,   stub(:id => 116,:name=>"harry"))
+      @sapling.activate_user(:chat,   stub(:id => 117,:name=>"franny"))
+    end
+
+    class Override
+      def chat_active?(options)
+        options[:user].name[0]=="f"
+      end
+    end
+
+    it "should return only the active features for the specific user" do
+      @sapling.controller = Override.new
+
+      @sapling.active?(:chat,:user => stub(:id=>115,:name => "fred")).should == true
+      @sapling.active?(:chat,:user => stub(:id=>120,:name => "h")).should == false
+      @sapling.active?(:chat,:user => stub(:id=>130,:name => "frank")).should == true
     end
   end
 

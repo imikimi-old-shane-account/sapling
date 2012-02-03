@@ -18,7 +18,11 @@ describe "Sapling::JavascriptGenerator" do
     end
 
     it "outputs js" do
-      Sapling::JavascriptGenerator.new(@sapling).generate(:user => stub(:id => 1)).should include 'html.addClass(\'sapling_feature_chat_on\');'
+      options = {:user => stub(:id => 1)}
+      Sapling::JavascriptGenerator.new(@sapling).generate(options.merge(
+        :active_features => @sapling.active_features(options),
+        :features => @sapling.features
+      )).should include 'html.addClass(\'sapling_feature_chat_on\');'
     end
   end
 
@@ -29,9 +33,13 @@ describe "Sapling::JavascriptGenerator" do
       @sapling.activate_user(:pwn, stub(:id => 102))
       @sapling.activate_user(:juggle, stub(:id => 115))
     end
-  
+
     it "test user bicycle & pwn user" do
-      output = Sapling::JavascriptGenerator.new(@sapling).generate(:user => stub(:id => 102))
+      options = {:user => stub(:id => 102)}
+      output = Sapling::JavascriptGenerator.new(@sapling).generate(options.merge(
+        :active_features => @sapling.active_features(options),
+        :features => @sapling.features
+      ))
       expected_features = {
         'bicycle' => true,
         'chat'    => false,
@@ -43,9 +51,13 @@ describe "Sapling::JavascriptGenerator" do
         output.should include "html.removeClass('sapling_feature_#{key}_#{!enabled ? 'on' : 'off'}');"
       end
     end
-  
+
     it "test chat & juggle user" do
-      output = Sapling::JavascriptGenerator.new(@sapling).generate(:user => stub(:id => 115))
+      options = {:user => stub(:id => 115)}
+      output = Sapling::JavascriptGenerator.new(@sapling).generate(options.merge(
+        :active_features => @sapling.active_features(options),
+        :features => @sapling.features
+      ))
       expected_features = {
         'bicycle' => false,
         'chat'    => true,
