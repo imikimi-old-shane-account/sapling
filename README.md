@@ -44,9 +44,15 @@ Server-side Usage
 
 To check if a feature is enabled for a user in rails controllers or views: use
   
-    feature_active?(:space_chat [, :user => the current user])
+    sapling.active?(:space_chat [, :user => the current user])
+    
   
   *Note*: sapling will automatically populate the user argument by calling `current_user`
+  
+To get the css classes the javascript adds to the HTML element for a feature:
+
+    sapling.css_class(:space_chat)
+    sapling.css_toggle_class(:space_chat)    
   
 To enable a feature for a specific user, in the rails console:
   
@@ -66,6 +72,23 @@ To disable a feature activated for anyone but individually-activated users, in t
   
 *Note*: Individually-activated users are always activated, regardless of the percentage setting.  A deactivated user
 may still have access to a feature if they fall within an active percentage.
+
+Custom Feature-Active Tests
+---------------------------
+
+You can optionally inject your own code for testing if a feature is active. In rails, just added methods of the following form to your ApplicationController:
+
+    # Example: override feature-active? for feature :new_homepage                                                         
+    # options:                                                                                                        
+    #   :feature => object of type Sapling::Feature
+    #       (current settings for the feature from the database)
+    #   :user => user to test for feature-active                                                                                                             
+    # return true if the feature is active.
+    def new_homepage_active?(options={})                                                                            
+      # your test here
+    end                                                                                                             
+
+*Note* If you are using Sapling manually, when you create a Sapling instance, you can pass in an any object which responds to "current_user" and implements zero or more of your feature-active overrides.
 
 Client-side Usage
 -----------------
@@ -100,11 +123,11 @@ CSS:
 
 ERB:
 
-    <div class="<%= feature_class(:chat) %> enabled">
+    <div class="<%= sapling.css_class(:chat) %> enabled">
       REJOICE - SPIFF CHAT ENABLED FOR YOU
     </div>
 
-    <div class="<%= feature_class(:chat) %> disabled">
+    <div class="<%= sapling.css_class(:chat) %> disabled">
       DESPAIR - SPIFF CHAT NOT ENABLED FOR YOU
     </div>
     
@@ -116,5 +139,4 @@ TODO
 
 * Rails 3 compatibility
 * Remove mootools dependency
-* CSS generator
 * Database migration generator
