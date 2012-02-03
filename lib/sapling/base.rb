@@ -31,15 +31,33 @@ module Sapling
 
     # see Sapling::API::Client
     def active?(feature, options={})
-      options = Util.normalized_options options
+      options = Util.normalized_options options, controller
       active_internal(feature,options)
     end
 
     # returns a list of features enabled for a user
     # see Sapling::API::Client
     def active_features(options={})
-      options = Util.normalized_options options
-      features.select {|key,feature| active_internal(key,options)}
+      options = Util.normalized_options options, controller
+      features.select {|feature_name,feature| active_internal(feature_name,options)}
+    end
+
+    def js_generator
+      @js_generator ||= JavascriptGenerator.new
+    end
+
+    def css_class_prefix
+      "sapling_feature"
+    end
+
+    # Use these classes on the container elements of your features
+    def css_class(feature)
+      "#{css_class_prefix}_#{feature.to_s}"
+    end
+
+    # Put these on the html element to turn on/off features
+    def css_toggle_class(feature, on)
+      "#{css_class(feature)}_#{on ? 'on' : 'off'}"
     end
   end
 end

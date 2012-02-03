@@ -17,12 +17,15 @@ describe "Sapling::JavascriptGenerator" do
       @sapling.activate_user(:chat, stub(:id => 1))
     end
 
-    it "outputs js" do
-      options = {:user => stub(:id => 1)}
-      Sapling::JavascriptGenerator.new(@sapling).generate(options.merge(
-        :active_features => @sapling.active_features(options),
-        :features => @sapling.features
-      )).should include 'html.addClass(\'sapling_feature_chat_on\');'
+    it "outputs js with user set via controller's current_user method" do
+      @sapling.controller = stub(:current_user => stub(:id => 1))
+      output = Sapling::JavascriptGenerator.new(@sapling).generate
+      output.should include 'html.addClass(\'sapling_feature_chat_on\');'
+    end
+
+    it "outputs js with user set by passing in the user as an option" do
+      output = Sapling::JavascriptGenerator.new(@sapling).generate(:user => stub(:id => 1))
+      output.should include 'html.addClass(\'sapling_feature_chat_on\');'
     end
   end
 
@@ -35,11 +38,7 @@ describe "Sapling::JavascriptGenerator" do
     end
 
     it "test user bicycle & pwn user" do
-      options = {:user => stub(:id => 102)}
-      output = Sapling::JavascriptGenerator.new(@sapling).generate(options.merge(
-        :active_features => @sapling.active_features(options),
-        :features => @sapling.features
-      ))
+      output = Sapling::JavascriptGenerator.new(@sapling).generate(:user => stub(:id => 102))
       expected_features = {
         'bicycle' => true,
         'chat'    => false,
@@ -53,11 +52,7 @@ describe "Sapling::JavascriptGenerator" do
     end
 
     it "test chat & juggle user" do
-      options = {:user => stub(:id => 115)}
-      output = Sapling::JavascriptGenerator.new(@sapling).generate(options.merge(
-        :active_features => @sapling.active_features(options),
-        :features => @sapling.features
-      ))
+      output = Sapling::JavascriptGenerator.new(@sapling).generate(:user => stub(:id => 115))
       expected_features = {
         'bicycle' => false,
         'chat'    => true,

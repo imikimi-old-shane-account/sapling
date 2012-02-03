@@ -2,7 +2,7 @@ class SpacemanSpiffsController < ApplicationController
   # GET /spaceman_spiffs
   # GET /spaceman_spiffs.xml
   def index
-    if feature_active?(:listing)
+    if sapling.active?(:listing)
       @spaceman_spiffs = SpacemanSpiff.all
 
       respond_to do |format|
@@ -18,7 +18,7 @@ class SpacemanSpiffsController < ApplicationController
   end
 
   def custom_test_feature
-    render :text => (feature_active?(:my_custom_test_feature) ? "1" : "0")
+    render :text => (sapling.active?(:my_custom_test_feature) ? "1" : "0")
   end
 
   # GET /spaceman_spiffs/1

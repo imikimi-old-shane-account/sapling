@@ -10,7 +10,8 @@ module Sapling
         ((cid=context_id(options)) && (cid%100)) || CONTEXT_ID_ONLY_ENABLED_IF_100_PERCENT_ENABLED
       end
 
-      def normalized_options(options)
+      def normalized_options(options,controller=nil)
+        options[:user] ||= controller.current_user if controller
         options[:user_id] ||= options[:user].id if options[:user]
         options[:context_id] ||= options[:user_id]
         options

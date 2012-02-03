@@ -22,6 +22,9 @@ module Sapling
       self.percentage = options[:percentage]
     end
 
+    # the Feature reports its name with "to_s"
+    def to_s; name.to_s; end
+
     # see Sapling::API::Client
     def active?(options={})
       options = Util.normalized_options(options)
