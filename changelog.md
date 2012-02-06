@@ -1,3 +1,9 @@
+0.4.3
+=====
+
+Change to gemspec to hopefully fix the bug that generates this in the compiled gemspec file:
+  s.add_development_dependency(%q<rails>, ["#<YAML::Syck::DefaultKey:0x7fe91ec26460> 2.3.12"])
+
 0.4.2
 =====
 
